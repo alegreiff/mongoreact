@@ -15,9 +15,8 @@ export default function Crear() {
   });
   return (
     <Layout>
-      {posts.map((post) => (
-        <EntradaModelo key={post._id} entrada={post} />
-      ))}
+      {posts ??
+        posts.map((post) => <EntradaModelo key={post._id} entrada={post} />)}
     </Layout>
   );
 }
