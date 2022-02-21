@@ -15,10 +15,15 @@ export default function Crear() {
   });
   return (
     <Layout>
-      {posts ??
-        posts.map((post) => <EntradaModelo key={post._id} entrada={post} />)}
+      <h5>Hola</h5>
     </Layout>
   );
 }
+
+/* 
+{posts ??  posts.map((post) => (
+        <EntradaModelo key={post._id} entrada={post} />
+      ))}
+*/
 
 /* <Box>{posts ?? posts.map((post) => <EntradaModelo key={post._id} />)}</Box> */
