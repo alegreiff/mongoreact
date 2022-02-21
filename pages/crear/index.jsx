@@ -2,9 +2,10 @@ import { Box, Container } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import EntradaModelo from "../../componentes/blog/Entrada";
 import Layout from "../../componentes/UI/Layout";
+import { withPrivate } from "../../data/rutas";
 import { estadoUsuario } from "../../data/StateZustand";
 
-export default function Crear() {
+function Crear() {
   const { entradas } = estadoUsuario((state) => state);
   const [posts, setPosts] = useState(entradas);
   useEffect(() => {
@@ -15,15 +16,11 @@ export default function Crear() {
   });
   return (
     <Layout>
-      <h5>Hola</h5>
+      {posts ??
+        posts.map((post) => <EntradaModelo key={post._id} entrada={post} />)}
     </Layout>
   );
 }
 
-/* 
-{posts ??  posts.map((post) => (
-        <EntradaModelo key={post._id} entrada={post} />
-      ))}
-*/
-
+export default withPrivate(Crear);
 /* <Box>{posts ?? posts.map((post) => <EntradaModelo key={post._id} />)}</Box> */

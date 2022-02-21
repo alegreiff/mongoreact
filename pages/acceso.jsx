@@ -3,7 +3,7 @@ import { auth, googleProvider } from "../data/firebase";
 import { signInWithPopup } from "firebase/auth";
 import { Box, Button } from "@mui/material";
 import { estadoUsuario } from "../data/StateZustand";
-import { withPublic } from "../data/rutas";
+import { withPrivate } from "../data/rutas";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
@@ -62,4 +62,4 @@ function AccesoPage() {
   );
 }
 
-export default withPublic(AccesoPage);
+export default withPrivate(AccesoPage);
