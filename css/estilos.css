@@ -1,0 +1,9 @@
+button.active {
+  border-bottom: 1px white solid;
+  border-right: 1px white solid;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
