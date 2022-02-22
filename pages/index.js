@@ -11,25 +11,18 @@ import Head from "next/head";
 
 import { estadoUsuario } from "../data/StateZustand";
 import { withPrivate } from "../data/rutas";
+import Layout from "../componentes/UI/Layout";
 
 function IndexPage() {
   const { usuario, setEntradas, entradas } = estadoUsuario((state) => state);
 
-  //console.log("USSSER", usuario);
-  console.log("INTROUNCESES", entradas);
   useEffect(() => {
     if (!entradas) {
       Entradas();
-      //const nuevosDatos = Entradas();
-      //console.log("DATA_Uyy", nuevosDatos);
-      //setEntradas(nuevosDatos);
-      //(data?.entradas);
-      //console.log("DATA_INN", entradas);
     }
   }, []);
 
   const Entradas = async () => {
-    console.log("discurre por la snetradas");
     const response = await fetch("/api/blog/all", {
       method: "GET",
       headers: {
@@ -41,7 +34,6 @@ function IndexPage() {
       throw new Error(data.message || "Algo salió remal");
     }
     setEntradas(data.entradas);
-    //return data;
   };
 
   return (
@@ -49,20 +41,20 @@ function IndexPage() {
       <Head>
         <meta name="jaime" content="lacasaloca"></meta>
       </Head>
-      <Container maxWidth="lg">
-        <MenuSuperior />
+
+      <Layout>
         <Box sx={{ my: 4 }}>
           <Typography variant="h4" component="h1" gutterBottom>
             Next.js example
           </Typography>
           <Link href="/about" color="secondary">
-            Go to the about page
+            Acerca de este ensayo
           </Link>
           <Button>Hola Ke ase</Button>
           <ProTip />
           <Copyright />
         </Box>
-      </Container>
+      </Layout>
     </>
   );
 }

@@ -6,7 +6,7 @@ import { estadoUsuario } from "../../data/StateZustand";
 
 function Crear() {
   const { entradas } = estadoUsuario((state) => state);
-  console.log(entradas);
+
   const [posts, setPosts] = useState(entradas);
   useEffect(() => {
     if (!posts) {

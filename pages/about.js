@@ -7,11 +7,11 @@ import ProTip from "../src/ProTip";
 import Link from "../src/Link";
 import Copyright from "../src/Copyright";
 import MenuSuperior from "../componentes/UI/MenuSuperior";
+import Layout from "../componentes/UI/Layout";
 
 export default function About() {
   return (
-    <Container maxWidth="lg">
-      <MenuSuperior />
+    <Layout>
       <Box sx={{ my: 4 }}>
         <Typography variant="h4" component="h1" gutterBottom>
           Next.js example
@@ -22,6 +22,6 @@ export default function About() {
         <ProTip />
         <Copyright />
       </Box>
-    </Container>
+    </Layout>
   );
 }
