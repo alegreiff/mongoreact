@@ -6,6 +6,7 @@ import { estadoUsuario } from "../../data/StateZustand";
 
 function Crear() {
   const { entradas } = estadoUsuario((state) => state);
+  console.log(entradas);
   const [posts, setPosts] = useState(entradas);
   useEffect(() => {
     if (!posts) {
@@ -13,14 +14,16 @@ function Crear() {
     }
     //console.log(posts);
   });
+  if (!entradas) {
+    return <h1>no hay nada aquí...</h1>;
+  }
   return (
     <Layout>
-      {posts.map((post) => (
+      {entradas.map((post) => (
         <EntradaModelo key={post._id} entrada={post} />
       ))}
     </Layout>
   );
 }
-
 export default withPrivate(Crear);
 /* <Box>{posts ?? posts.map((post) => <EntradaModelo key={post._id} />)}</Box> */
