@@ -1,4 +1,3 @@
-import { Box, Container } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import EntradaModelo from "../../componentes/blog/Entrada";
 import Layout from "../../componentes/UI/Layout";
@@ -16,8 +15,9 @@ function Crear() {
   });
   return (
     <Layout>
-      {posts ??
-        posts.map((post) => <EntradaModelo key={post._id} entrada={post} />)}
+      {posts.map((post) => (
+        <EntradaModelo key={post._id} entrada={post} />
+      ))}
     </Layout>
   );
 }

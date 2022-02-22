@@ -22,26 +22,12 @@ function AccesoPage() {
 
   const loginGoogle = async () => {
     const { error, user } = await signInWithPopup(auth, googleProvider);
-    if (user.email === "alegreiff@gmail.com") {
-      Swal.fire({
-        title: user.email,
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        //showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire("Deleted!", "Your file has been deleted.", "success");
-          setUser(user);
-          //setUsuario(user ?? null);
-          setError(error ?? "");
-        }
-      });
+    setUser(user);
+    /* if (user.email === "alegreiff@gmail.com") {
+      setUser(user);
     } else {
       Swal.fire("Tu correo NO está autorizado");
-    }
+    } */
     //setUsuario(user ?? null);
     //setError(error ?? "");
   };
