@@ -18,8 +18,8 @@ function PostIndexPage({ posts }) {
   );
 }
 
-PostIndexPage.getInitialProps = async () => {
-  const res = await fetch("http://localhost:3000/api/posts");
+PostIndexPage.getInitialProps = async ({ origin }) => {
+  const res = await fetch(`${origin}/api/posts`);
   const { data } = await res.json();
   return { posts: data };
 };
