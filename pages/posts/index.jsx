@@ -51,7 +51,7 @@ function PostIndexPage({ posts }) {
 
 //getInitialProps = async ({  }) => {
 export async function getServerSideProps(context) {
-  console.log("LECONTEXTÉ", context);
+  console.log("LECONTEXTÉ", process.env.HOST);
   const res = await fetch(`${process.env.HOST}/api/posts`);
   const { data } = await res.json();
   return {
