@@ -2,6 +2,7 @@ import { Button, Grid, TextField } from "@mui/material";
 import React from "react";
 import { FormBase } from "../../componentes/formularios/Formulario";
 import Layout from "../../componentes/UI/Layout";
+import fetch from "isomorphic-fetch";
 //FORMULARIOS
 import { useFormik } from "formik";
 import { validationSchemaPost } from "../../componentes/formularios/validacionEntrada";
