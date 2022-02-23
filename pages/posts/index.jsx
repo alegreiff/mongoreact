@@ -12,6 +12,7 @@ import React from "react";
 import Layout from "../../componentes/UI/Layout";
 
 function PostIndexPage({ posts }) {
+  console.log(process.env.NODE_ENV);
   return (
     <Layout>
       <Grid container spacing={3}>
@@ -51,7 +52,7 @@ function PostIndexPage({ posts }) {
 
 //getInitialProps = async ({  }) => {
 export async function getServerSideProps(context) {
-  console.log("LECONTEXTÉ", process.env.HOST);
+  //console.log("LECONTEXTÉ", process.env.HOST);
   const res = await fetch(`${process.env.HOST}/api/posts`);
   const { data } = await res.json();
   return {

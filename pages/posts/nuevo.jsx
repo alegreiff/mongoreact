@@ -31,7 +31,11 @@ export default function nuevo() {
       contenido: values.contenido,
     };
     try {
-      const res = await fetch(`${process.env.HOST}/api/posts`, {
+      const URL =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:3000"
+          : "https://jaimedegreiff.ml";
+      const res = await fetch(`${URL}/api/posts`, {
         method: "POST",
         headers: {
           Accept: "application/json",
