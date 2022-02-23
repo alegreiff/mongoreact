@@ -30,7 +30,7 @@ export default function nuevo() {
       contenido: values.contenido,
     };
     try {
-      const res = await fetch("http://localhost:3000/api/posts", {
+      const res = await fetch(`${process.env.HOST}/api/posts`, {
         method: "POST",
         headers: {
           Accept: "application/json",
