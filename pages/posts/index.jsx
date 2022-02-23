@@ -16,7 +16,7 @@ function PostIndexPage({ posts }) {
     <Layout>
       <Grid container spacing={3}>
         {posts.map((post) => (
-          <Grid item xs={6} key={post._id}>
+          <Grid item xs={4} key={post._id}>
             <Card>
               <CardContent>
                 <Typography
@@ -31,7 +31,14 @@ function PostIndexPage({ posts }) {
               </CardContent>
               <CardActions>
                 <Link href={`/posts/${post._id}`}>
-                  <Button size="small">Learn More</Button>
+                  <Button size="small" variant="outlined">
+                    Ver entrada
+                  </Button>
+                </Link>
+                <Link href={`/posts/${post._id}/edit`}>
+                  <Button size="small" color="secondary" variant="contained">
+                    Editar
+                  </Button>
                 </Link>
               </CardActions>
             </Card>
@@ -46,7 +53,6 @@ function PostIndexPage({ posts }) {
 export async function getServerSideProps(context) {
   console.log("LECONTEXTÉ", context);
   const res = await fetch("https://jaimedegreiff.ml/api/posts");
-  //const res = await fetch("http://localhost:3000/api/posts");
   const { data } = await res.json();
   return {
     props: { posts: data },

@@ -23,11 +23,11 @@ function AccesoPage() {
   const loginGoogle = async () => {
     const { error, user } = await signInWithPopup(auth, googleProvider);
     setUser(user);
-    /* if (user.email === "alegreiff@gmail.com") {
+    if (user.email === "alegreiff@gmail.com") {
       setUser(user);
     } else {
       Swal.fire("Tu correo NO está autorizado");
-    } */
+    }
     //setUsuario(user ?? null);
     //setError(error ?? "");
   };

@@ -10,16 +10,16 @@ const PostSchema = new mongoose.Schema({
 
   contenido: {
     type: String,
-    required: [true, "Contenido rrquerido"],
+    required: [true, "Contenido requerido"],
     trim: true,
   },
   accesos: {
     type: Number,
-    required: [true],
+    required: [false],
   },
   fechaPublicacion: {
     type: String,
-    required: [true],
+    required: [false],
   },
 });
 

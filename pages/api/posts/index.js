@@ -4,6 +4,7 @@ import Post from "../../../data/models/Post";
 dbConnect();
 
 export default async (req, res) => {
+  console.log(req.body);
   const { method } = req;
 
   switch (method) {
@@ -20,7 +21,7 @@ export default async (req, res) => {
         const post = await Post.create(req.body);
         res.status(201).json({ success: true, data: post });
       } catch (error) {
-        res.status(400).json({ success: false });
+        res.status(402).json({ success: false, pailas: "sisas" });
       }
       break;
     default:

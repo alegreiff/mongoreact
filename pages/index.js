@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import ProTip from "../src/ProTip";
 import Link from "../src/Link";
 import Copyright from "../src/Copyright";
 import { Button } from "@mui/material";
-import MenuSuperior from "../componentes/UI/MenuSuperior";
 import Head from "next/head";
 
 import { estadoUsuario } from "../data/StateZustand";
@@ -36,10 +34,15 @@ function IndexPage() {
     setEntradas(data.entradas);
   };
 
+  if (!usuario) {
+    return null;
+  }
+
   return (
     <>
       <Head>
         <meta name="jaime" content="lacasaloca"></meta>
+        <title>El comienzo de la web</title>
       </Head>
 
       <Layout>

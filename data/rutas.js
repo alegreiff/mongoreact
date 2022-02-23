@@ -8,7 +8,7 @@ export function withPublic(Component) {
     const router = useRouter();
     if (usuario) {
       router.replace("/");
-      return <h1>Cargando</h1>;
+      return <h1>Cargando AAA </h1>;
     }
     return <Component />;
   };
@@ -21,9 +21,9 @@ export function withPrivate(Component) {
     const router = useRouter();
     useEffect(() => {
       if (!usuario) {
-        console.log("NADA");
+        console.log("Pasa por with private function");
         router.replace("/acceso");
-        return <h1>Cargando</h1>;
+        return <h1>Cargando BBB </h1>;
       }
     });
 
