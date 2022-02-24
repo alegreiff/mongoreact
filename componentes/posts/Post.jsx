@@ -21,10 +21,10 @@ export const Post = ({ post, tipo = "lista" }) => {
           : "https://jaimedegreiff.ml";
       const res = await fetch(`${URL}/api/posts/${id}`, {
         method: "DELETE",
-        headers: {
+        /* headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-        },
+        }, */
       });
       console.log(res);
       router.push("/posts");

@@ -18,7 +18,7 @@ function PostIndexPage({ posts }) {
     <Layout>
       <Grid container spacing={3}>
         {posts.map((post) => (
-          <Grid item xs={4} key={post._id}>
+          <Grid item xs={12} md={6} xl={4} key={post._id}>
             <Post post={post} tipo="lista" />
           </Grid>
         ))}
