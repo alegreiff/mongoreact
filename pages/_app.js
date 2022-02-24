@@ -7,10 +7,6 @@ import { CacheProvider } from "@emotion/react";
 import theme from "../src/theme";
 import createEmotionCache from "../src/createEmotionCache";
 import "../css/estilos.css";
-import "nprogress/nprogress.css";
-
-import nprogress from "nprogress";
-import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 
 const TopProgressBar = dynamic(
@@ -40,6 +36,8 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
+        <TopProgressBar />
+
         <Component {...pageProps} />
       </ThemeProvider>
     </CacheProvider>
