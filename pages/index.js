@@ -6,19 +6,28 @@ import Link from "../src/Link";
 import Copyright from "../src/Copyright";
 import { Button } from "@mui/material";
 import Head from "next/head";
-
 import { estadoUsuario } from "../data/StateZustand";
 import { withPrivate } from "../data/rutas";
 import Layout from "../componentes/UI/Layout";
 
-function IndexPage() {
+function IndexPage(props) {
+  console.log(props);
   const { usuario, setEntradas, entradas } = estadoUsuario((state) => state);
 
   useEffect(() => {
+    //retinaData();
     if (!entradas) {
       Entradas();
     }
   }, []);
+
+  /* const retinaData = async () => {
+    const response = await fetch(
+      "https://script.google.com/macros/s/AKfycbztzXBkzgYd4kgV3BAa1fi1-UQY8rgw4935BkyUt0-bEJJeTgrDHX1dIxqyzSDG03g/exec"
+    );
+    const data = await response.json();
+    console.log(data);
+  }; */
 
   const Entradas = async () => {
     const response = await fetch("/api/blog/all", {
@@ -54,6 +63,7 @@ function IndexPage() {
             Acerca de este ensayo
           </Link>
           <Button>Hola Ke ase</Button>
+
           <ProTip />
           <Copyright />
         </Box>
@@ -62,4 +72,14 @@ function IndexPage() {
   );
 }
 
+export async function getServerSideProps(context) {
+  //console.log("LECONTEXTÉ", process.env.HOST);
+  const response = await fetch(
+    "https://script.google.com/macros/s/AKfycbztzXBkzgYd4kgV3BAa1fi1-UQY8rgw4935BkyUt0-bEJJeTgrDHX1dIxqyzSDG03g/exec"
+  );
+  const data = await response.json();
+  return {
+    props: { posts: data },
+  };
+}
 export default withPrivate(IndexPage);

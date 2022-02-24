@@ -7,7 +7,6 @@ let activeRequests = 0;
 const delay = 250;
 
 function load() {
-  console.log("CARGANDO LOAD");
   if (state === "loading") {
     return;
   }
@@ -20,7 +19,6 @@ function load() {
 }
 
 function stop() {
-  console.log("CARGANDO STOP");
   if (activeRequests > 0) {
     return;
   }
@@ -36,7 +34,7 @@ Router.events.on("routeChangeComplete", stop);
 Router.events.on("routeChangeError", stop);
 
 const originalFetch = window.fetch;
-console.log("OF", originalFetch);
+
 window.fetch = async function (...args) {
   if (activeRequests === 0) {
     load();

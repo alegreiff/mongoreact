@@ -18,7 +18,6 @@ export function withPublic(Component) {
 
 export function withPrivate(Component) {
   return function WithPrivate(props) {
-    console.log("WithPrivate", props.post);
     const { setUsuario } = estadoUsuario((state) => state);
 
     const router = useRouter();
@@ -26,20 +25,12 @@ export function withPrivate(Component) {
       onAuthStateChanged(auth, (user) => {
         if (user) {
           setUsuario(user);
-          console.log("user resetted");
+          console.log("USER SETTED");
         } else {
-          console.log("Nolas");
           router.replace("/acceso");
         }
       });
     }, []);
-    /* useEffect(() => {
-      if (!usuario) {
-        console.log("Pasa por with private function");
-        router.replace("/acceso");
-        return <h1>Cargando BBB </h1>;
-      }
-    }); */
 
     return <Component {...props} />;
   };

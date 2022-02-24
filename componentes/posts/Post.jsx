@@ -35,8 +35,6 @@ export const Post = ({ post, tipo = "lista" }) => {
   const borraPost = (post) => {
     Swal.fire({
       title: `¿Desea borrar ${post.tituloEntrada}?`,
-      //text: "You won't be able to revert this!",
-      //icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
@@ -53,7 +51,7 @@ export const Post = ({ post, tipo = "lista" }) => {
     });
   };
   return (
-    <Card>
+    <Card sx={{ marginTop: "2rem" }}>
       <CardContent>
         <Typography sx={{ fontSize: 22 }} color="text.secondary" gutterBottom>
           {post.tituloEntrada}

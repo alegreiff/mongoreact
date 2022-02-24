@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -21,13 +21,19 @@ const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const MenuSuperior = () => {
+  const { setUsuario, usuario } = estadoUsuario((state) => state);
+  const [mmenu, setMmenu] = useState([]);
+  useEffect(() => {
+    const elementos = menu.filter((e) => e.auth);
+    setMmenu(elementos);
+  }, []);
   const cierraSesion = async () => {
     await auth.signOut();
     setUsuario(null);
   };
-  const { setUsuario, usuario } = estadoUsuario((state) => state);
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -54,7 +60,7 @@ const MenuSuperior = () => {
             component="div"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
-            {usuario?.uid}
+            @alegreiff
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -86,17 +92,15 @@ const MenuSuperior = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {menu.map((item) => (
+              {mmenu.map((item) => (
                 <MenuItem key={item.id} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
-                    <Link
-                      key={item.id}
-                      href={item.enlace}
-                      handleCloseNavMenu={handleCloseNavMenu}
-                    >
-                      {item.nombre}
-                    </Link>
-                  </Typography>
+                  <Link
+                    key={item.id}
+                    href={item.enlace}
+                    handleCloseNavMenu={handleCloseNavMenu}
+                  >
+                    {item.nombre}
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -110,7 +114,7 @@ const MenuSuperior = () => {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {menu.map((item) => (
+            {mmenu.map((item) => (
               <NaviLink
                 key={item.id}
                 enlace={item.enlace}

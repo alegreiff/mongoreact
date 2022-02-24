@@ -1,13 +1,5 @@
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Grid } from "@mui/material";
 import fetch from "isomorphic-fetch";
-import Link from "next/link";
 import React from "react";
 import { Post } from "../../componentes/posts/Post";
 import Layout from "../../componentes/UI/Layout";
