@@ -39,7 +39,7 @@ function AccesoPage() {
         minHeight="100vh"
       >
         <Button variant="contained" onClick={loginGoogle}>
-          Acceso google 1047
+          Acceso google Bomber
         </Button>
       </Box>
     </>

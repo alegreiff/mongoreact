@@ -14,7 +14,9 @@ import Layout from "../../componentes/UI/Layout";
 import { withPrivate } from "../../data/rutas";
 
 function PostIndexPage({ posts }) {
-  console.log(process.env.NODE_ENV);
+  if (!posts) {
+    return <h3>Cargando la data</h3>;
+  }
   return (
     <Layout>
       <Grid container spacing={3}>
