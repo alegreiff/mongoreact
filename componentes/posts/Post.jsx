@@ -78,12 +78,13 @@ export const Post = ({ post, tipo = "lista" }) => {
 
         {tipo === "sencillo" && (
           <Button
+            sx={{ background: "#DC143C", color: "white" }}
             size="small"
             color="secondary"
             variant="outlined"
             onClick={() => borraPost(post)}
           >
-            Eliminar
+            Eliminar !
           </Button>
         )}
       </CardActions>

@@ -1,4 +1,4 @@
-import { Button, Grid, TextField } from "@mui/material";
+import { Box, Button, Grid, TextField } from "@mui/material";
 import React from "react";
 import { FormBase } from "../../componentes/formularios/Formulario";
 import Layout from "../../componentes/UI/Layout";
@@ -8,7 +8,13 @@ import { useFormik } from "formik";
 import { validationSchemaPost } from "../../componentes/formularios/validacionEntrada";
 import estilos from "../../componentes/formularios/formularios.module.css";
 import { useRouter } from "next/router";
-
+//FECHA
+import moment from "moment";
+import "moment/locale/es";
+moment.locale("es"); // it is required to select default locale manually
+import DateAdapter from "@mui/lab/AdapterMoment";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import { DatePicker } from "@mui/lab";
 //SWAL
 import Swal from "sweetalert2";
 
@@ -18,6 +24,7 @@ export default function nuevo() {
     initialValues: {
       tituloEntrada: "",
       contenido: "",
+      fechaPublicacion: "",
     },
     onSubmit: (values) => {
       creaEntrada(values);
@@ -33,6 +40,8 @@ export default function nuevo() {
     const newPost = {
       tituloEntrada: values.tituloEntrada,
       contenido: values.contenido,
+      fechaPublicacion: moment(values.fechaPublicacion).format(),
+      accesos: 0,
     };
     try {
       const URL =
@@ -59,7 +68,7 @@ export default function nuevo() {
     <Layout>
       <Grid container>
         <Grid item xs={3}></Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <FormBase nombre="Nuevo minipost" onSubmit={formik.handleSubmit}>
             <TextField
               label="Título"
@@ -76,6 +85,28 @@ export default function nuevo() {
               }
               onBlur={formik.handleBlur}
             ></TextField>
+            <Box className={estilos.input}>
+              <LocalizationProvider dateAdapter={DateAdapter}>
+                <DatePicker
+                  label="Fecha de publicación"
+                  value={formik.values.fechaPublicacion}
+                  onChange={(newValue) => {
+                    formik.setFieldValue("fechaPublicacion", newValue);
+                    /* moment(newValue).format("DD-MM-YYYY") */
+                  }}
+                  error={
+                    formik.touched.fechaPublicacion &&
+                    Boolean(formik.errors.fechaPublicacion)
+                  }
+                  helperText={
+                    formik.touched.fechaPublicacion &&
+                    formik.errors.fechaPublicacion
+                  }
+                  onBlur={formik.handleBlur}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
+            </Box>
             <TextField
               className={estilos.input}
               multiline

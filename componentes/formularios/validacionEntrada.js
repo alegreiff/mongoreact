@@ -11,6 +11,7 @@ export const validationSchemaEntrada = yup.object({
 export const validationSchemaPost = yup.object({
   tituloEntrada: yup.string().required("Se necesita el título"),
   contenido: yup.string(),
+  fechaPublicacion: yup.date().required("Date is required"),
 });
 
 /*  

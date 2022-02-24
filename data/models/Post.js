@@ -15,11 +15,11 @@ const PostSchema = new mongoose.Schema({
   },
   accesos: {
     type: Number,
-    required: [false],
+    required: [true],
   },
   fechaPublicacion: {
-    type: String,
-    required: [false],
+    type: Date,
+    required: [true],
   },
 });
 
