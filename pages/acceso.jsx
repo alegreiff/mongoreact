@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 function AccesoPage() {
-  const mensaje = withReactContent(Swal);
+  //const mensaje = withReactContent(Swal);
   const { setUsuario } = estadoUsuario((state) => state);
   const [user, setUser] = useState(null);
   //console.log(usuario);

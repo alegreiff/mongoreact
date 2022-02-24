@@ -8,6 +8,10 @@ import { useFormik } from "formik";
 import { validationSchemaPost } from "../../componentes/formularios/validacionEntrada";
 import estilos from "../../componentes/formularios/formularios.module.css";
 import { useRouter } from "next/router";
+
+//SWAL
+import Swal from "sweetalert2";
+
 export default function nuevo() {
   const router = useRouter();
   const formik = useFormik({
@@ -44,6 +48,7 @@ export default function nuevo() {
         body: JSON.stringify(newPost),
       });
       console.log(res);
+      Swal.fire("Good job!", "You clicked the button!", "success");
       router.push("/posts");
     } catch (error) {
       console.log(error);
