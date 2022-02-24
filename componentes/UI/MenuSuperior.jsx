@@ -86,9 +86,17 @@ const MenuSuperior = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {menu.map((item) => (
+                <MenuItem key={item.id} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link
+                      key={item.id}
+                      href={item.enlace}
+                      handleCloseNavMenu={handleCloseNavMenu}
+                    >
+                      {item.nombre}
+                    </Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
