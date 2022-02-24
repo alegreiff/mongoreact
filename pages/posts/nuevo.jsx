@@ -17,8 +17,9 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { DatePicker } from "@mui/lab";
 //SWAL
 import Swal from "sweetalert2";
+import { withPrivate } from "../../data/rutas";
 
-export default function nuevo() {
+function Nuevo() {
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -136,3 +137,4 @@ export default function nuevo() {
     </Layout>
   );
 }
+export default withPrivate(Nuevo);

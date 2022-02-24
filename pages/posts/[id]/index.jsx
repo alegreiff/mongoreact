@@ -4,8 +4,10 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../../componentes/UI/Layout";
 import { Post } from "../../../componentes/posts/Post";
 import { Grid } from "@mui/material";
+import { withPrivate } from "../../../data/rutas";
 
-export default function SinglePost({ post }) {
+function SinglePost({ post }) {
+  console.log("post", post);
   const router = useRouter();
 
   return (
@@ -20,7 +22,7 @@ export default function SinglePost({ post }) {
     </Layout>
   );
 }
-
+export default withPrivate(SinglePost);
 export async function getServerSideProps({ query: { id } }) {
   const res = await fetch(`${process.env.HOST}/api/posts/${id}`);
   const { data } = await res.json();

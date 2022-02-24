@@ -17,8 +17,9 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { DatePicker } from "@mui/lab";
 //SWAL
 import Swal from "sweetalert2";
+import { withPrivate } from "../../../data/rutas";
 
-export default function nuevo({ post }) {
+function NuevoPost({ post }) {
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -135,7 +136,7 @@ export default function nuevo({ post }) {
     </Layout>
   );
 }
-
+export default withPrivate(NuevoPost);
 export async function getServerSideProps({ query: { id } }) {
   const res = await fetch(`${process.env.HOST}/api/posts/${id}`);
   const { data } = await res.json();

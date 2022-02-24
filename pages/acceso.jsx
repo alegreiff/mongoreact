@@ -28,8 +28,6 @@ function AccesoPage() {
     } else {
       Swal.fire("Tu correo NO está autorizado");
     }
-    //setUsuario(user ?? null);
-    //setError(error ?? "");
   };
 
   return (
@@ -41,7 +39,7 @@ function AccesoPage() {
         minHeight="100vh"
       >
         <Button variant="contained" onClick={loginGoogle}>
-          Acceso google
+          Acceso google 1047
         </Button>
       </Box>
     </>

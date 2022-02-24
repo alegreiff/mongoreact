@@ -11,6 +11,7 @@ import Link from "next/link";
 import React from "react";
 import { Post } from "../../componentes/posts/Post";
 import Layout from "../../componentes/UI/Layout";
+import { withPrivate } from "../../data/rutas";
 
 function PostIndexPage({ posts }) {
   console.log(process.env.NODE_ENV);
@@ -26,6 +27,8 @@ function PostIndexPage({ posts }) {
     </Layout>
   );
 }
+export default withPrivate(PostIndexPage);
+//export default PostIndexPage;
 
 //getInitialProps = async ({  }) => {
 export async function getServerSideProps(context) {
@@ -36,5 +39,3 @@ export async function getServerSideProps(context) {
     props: { posts: data },
   };
 }
-
-export default PostIndexPage;

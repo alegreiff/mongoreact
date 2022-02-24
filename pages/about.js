@@ -8,8 +8,9 @@ import Link from "../src/Link";
 import Copyright from "../src/Copyright";
 import MenuSuperior from "../componentes/UI/MenuSuperior";
 import Layout from "../componentes/UI/Layout";
+import { withPublic } from "../data/rutas";
 
-export default function About() {
+function About() {
   return (
     <Layout>
       <Box sx={{ my: 4 }}>
@@ -25,3 +26,4 @@ export default function About() {
     </Layout>
   );
 }
+export default withPublic(About);
