@@ -7,45 +7,27 @@ import { CacheProvider } from "@emotion/react";
 import theme from "../src/theme";
 import createEmotionCache from "../src/createEmotionCache";
 import "../css/estilos.css";
+import "nprogress/nprogress.css";
 
 import nprogress from "nprogress";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 
+const TopProgressBar = dynamic(
+  () => {
+    return import("../componentes/TopProgressBar");
+  },
+  { ssr: false }
+);
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
 export default function MyApp(props) {
-  const router = useRouter();
-
-  React.useEffect(() => {
-    const handleRouteChange = (url, { shallow }) => {
-      if (shallow) {
-        nprogress.start();
-      } else {
-        nprogress.done();
-      }
-      console.log("oh shallouuuu", shallow);
-      console.log(
-        `App is changing to ${url} ${
-          shallow ? "with" : "without"
-        } shallow routing`
-      );
-    };
-
-    router.events.on("routeChangeStart", handleRouteChange);
-
-    // If the component is unmounted, unsubscribe
-    // from the event with the `off` method:
-    return () => {
-      router.events.off("routeChangeStart", handleRouteChange);
-    };
-  }, []);
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   return (
     <CacheProvider value={emotionCache}>
       <Head>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css"
@@ -53,6 +35,7 @@ export default function MyApp(props) {
           crossorigin="anonymous"
           referrerpolicy="no-referrer"
         />
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
