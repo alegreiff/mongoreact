@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import ProTip from "../src/ProTip";
@@ -9,10 +9,20 @@ import Head from "next/head";
 import { estadoUsuario } from "../data/StateZustand";
 import { withPrivate } from "../data/rutas";
 import Layout from "../componentes/UI/Layout";
+import useSWR from "swr";
+
+const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
 function IndexPage(props) {
   console.log(props);
+  const GoogleURL =
+    "https://script.google.com/macros/s/AKfycbydSoKVY_hk0RRd8FOiWuVEVcrUhk9MQs_G38sx3ibbxaEDmGPaYx90Ea803s3te6hx/exec";
+
+  const { data, error } = useSWR(GoogleURL, fetcher);
   const { usuario, setEntradas, entradas } = estadoUsuario((state) => state);
+
+  if (error) return <h1>{error}</h1>;
+  console.log(data);
 
   useEffect(() => {
     //retinaData();
@@ -21,14 +31,6 @@ function IndexPage(props) {
     }
   }, []);
 
-  /* const retinaData = async () => {
-    const response = await fetch(
-      "https://script.google.com/macros/s/AKfycbztzXBkzgYd4kgV3BAa1fi1-UQY8rgw4935BkyUt0-bEJJeTgrDHX1dIxqyzSDG03g/exec"
-    );
-    const data = await response.json();
-    console.log(data);
-  }; */
-
   const Entradas = async () => {
     const response = await fetch("/api/blog/all", {
       method: "GET",
@@ -36,11 +38,11 @@ function IndexPage(props) {
         "Content-Type": "application/json",
       },
     });
-    const data = await response.json();
+    const adata = await response.json();
     if (!response.ok) {
-      throw new Error(data.message || "Algo salió remal");
+      throw new Error(adata.message || "Algo salió remal");
     }
-    setEntradas(data.entradas);
+    setEntradas(adata.entradas);
   };
 
   if (!usuario) {
@@ -49,6 +51,31 @@ function IndexPage(props) {
 
   return (
     <>
+      <Layout>
+        {data?.datos
+          ? data.datos.map((film) => {
+              return <h5 key={film.id}>{film.titulo}</h5>;
+            })
+          : "C A R G A N D O"}
+      </Layout>
+    </>
+  );
+}
+
+/* export async function getServerSideProps(context) {
+  //console.log("LECONTEXTÉ", process.env.HOST);
+  const response = await fetch(
+    "https://script.google.com/macros/s/AKfycbydSoKVY_hk0RRd8FOiWuVEVcrUhk9MQs_G38sx3ibbxaEDmGPaYx90Ea803s3te6hx/exec"
+  );
+  const data = await response.json();
+  return {
+    props: { posts: data },
+  };
+} */
+export default withPrivate(IndexPage);
+
+/* 
+<>
       <Head>
         <meta name="jaime" content="lacasaloca"></meta>
         <title>El comienzo de la web</title>
@@ -69,17 +96,5 @@ function IndexPage(props) {
         </Box>
       </Layout>
     </>
-  );
-}
 
-export async function getServerSideProps(context) {
-  //console.log("LECONTEXTÉ", process.env.HOST);
-  const response = await fetch(
-    "https://script.google.com/macros/s/AKfycbydSoKVY_hk0RRd8FOiWuVEVcrUhk9MQs_G38sx3ibbxaEDmGPaYx90Ea803s3te6hx/exec"
-  );
-  const data = await response.json();
-  return {
-    props: { posts: data },
-  };
-}
-export default withPrivate(IndexPage);
+*/

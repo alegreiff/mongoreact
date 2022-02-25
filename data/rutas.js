@@ -10,7 +10,7 @@ export function withPublic(Component) {
     const router = useRouter();
     if (usuario) {
       router.replace("/");
-      return <h1>Cargando AAA </h1>;
+      return null;
     }
     return <Component />;
   };
