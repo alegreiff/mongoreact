@@ -1,15 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import ProTip from "../src/ProTip";
 import Link from "../src/Link";
 import Copyright from "../src/Copyright";
-import { Button } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
 import Head from "next/head";
 import { estadoUsuario } from "../data/StateZustand";
 import { withPrivate } from "../data/rutas";
 import Layout from "../componentes/UI/Layout";
 import useSWR from "swr";
+import { Film } from "../componentes/peliculas/Film";
 
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
@@ -20,9 +21,23 @@ function IndexPage(props) {
 
   const { data, error } = useSWR(GoogleURL, fetcher);
   const { usuario, setEntradas, entradas } = estadoUsuario((state) => state);
+  const [palabra, setPalabra] = useState("");
+  const [peliculas, setPeliculas] = useState([]);
 
   if (error) return <h1>{error}</h1>;
   console.log(data);
+
+  const filtroPalabra = (e) => {
+    setPalabra(e.target.value);
+  };
+  useEffect(() => {
+    if (data?.datos) {
+      const filtro = data.datos.filter((f) =>
+        f.titulo.toLowerCase().includes(palabra.toLowerCase())
+      );
+      setPeliculas(filtro);
+    }
+  }, [palabra]);
 
   useEffect(() => {
     //retinaData();
@@ -52,11 +67,23 @@ function IndexPage(props) {
   return (
     <>
       <Layout>
-        {data?.datos
-          ? data.datos.map((film) => {
-              return <h5 key={film.id}>{film.titulo}</h5>;
-            })
-          : "C A R G A N D O"}
+        <Box mb={5} mt={3}>
+          <TextField
+            id="outlined-basic"
+            label="País"
+            variant="outlined"
+            placeholder="País"
+            onChange={filtroPalabra}
+          />{" "}
+          {palabra}
+        </Box>
+        <Grid container spacing={2}>
+          {peliculas
+            ? peliculas.map((film) => {
+                return <Film key={film.id} film={film} />;
+              })
+            : "C A R G A N D O"}
+        </Grid>
       </Layout>
     </>
   );
